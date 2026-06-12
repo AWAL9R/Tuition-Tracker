@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="6dp">
 
     <ListView
         android:id="@+id/listViewClasses"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/fabContainer"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0.5dp" />
 
@@ -19,8 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:layout_margin="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabBackup"
@@ -29,6 +29,7 @@
             android:layout_marginBottom="8dp"
             android:contentDescription="Backup database data"
             app:fabSize="mini"
+            app:shapeAppearanceOverlay="@style/CircularFAB"
             app:srcCompat="@android:drawable/ic_menu_save" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,6 +39,7 @@
             android:layout_marginBottom="8dp"
             android:contentDescription="Restore database from backup file"
             app:fabSize="mini"
+            app:shapeAppearanceOverlay="@style/CircularFAB"
             app:srcCompat="@android:drawable/ic_menu_upload" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -46,6 +48,7 @@
             android:layout_height="wrap_content"
             android:contentDescription="Add a new student or class entry"
             app:fabSize="normal"
+            app:shapeAppearanceOverlay="@style/CircularFAB"
             app:srcCompat="@android:drawable/ic_input_add" />
 
     </LinearLayout>

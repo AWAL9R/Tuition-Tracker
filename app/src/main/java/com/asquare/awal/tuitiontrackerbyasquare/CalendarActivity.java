@@ -63,6 +63,9 @@ public class CalendarActivity extends AppCompatActivity {
         currentCalendarContext = Calendar.getInstance();
         dayCells = new ArrayList<>();
 
+        cellsAdapter = new CalendarCellsAdapter(dayCells, getApplicationContext());
+        calendarGridView.setAdapter(cellsAdapter);
+
         updateCalendarGrid();
 
         btnPreviousMonth.setOnClickListener(v -> {
@@ -111,9 +114,7 @@ public class CalendarActivity extends AppCompatActivity {
             dayCells.add(tempCal.getTime());
             tempCal.add(Calendar.DAY_OF_MONTH, 1);
         }
-
-        cellsAdapter = new CalendarCellsAdapter(dayCells, getApplicationContext());
-        calendarGridView.setAdapter(cellsAdapter);
+        cellsAdapter.notifyDataSetChanged();
     }
 
     private void handleDateClick(String selectedDateStr) {
@@ -157,10 +158,14 @@ public class CalendarActivity extends AppCompatActivity {
         private final Context context;
         private final LayoutInflater inflater;
 
+        private final Calendar calendar;
+
+
         public CalendarCellsAdapter(ArrayList<Date> days, Context context) {
             this.days = days;
             this.context = context;
             this.inflater = LayoutInflater.from(context);
+            this.calendar = Calendar.getInstance();
         }
 
         @Override
@@ -207,9 +212,11 @@ public class CalendarActivity extends AppCompatActivity {
 
             Date dateEntity = days.get(position);
             if (dateEntity != null) {
-                Calendar c = Calendar.getInstance();
-                c.setTime(dateEntity);
-                holder.textView.setText(String.valueOf(c.get(Calendar.DAY_OF_MONTH)));
+
+                calendar.setTime(dateEntity);
+                String dateStr=String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+                holder.textView.setText(dateStr);
+
 
                 // Check Database to evaluate if date should show marked highlight status tints
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
